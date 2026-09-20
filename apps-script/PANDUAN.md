@@ -1,85 +1,86 @@
 # Kolom **Link** di Spreadsheet Ucapan
 
-Mulai sekarang setiap ucapan yang dikirim tamu otomatis menyimpan **link undangan yang
-dibuka** (termasuk `?to=Nama Tamu`) di kolom baru bernama **Link** pada spreadsheet.
+Spreadsheet Anda belum punya kolom `Link` karena kode Apps Script yang terpasang hanya
+menulis **5 kolom** (`Waktu, Nama, Kehadiran, Tamu, Ucapan`). Halaman undangan **sudah**
+mengirim field `link`, jadi yang perlu diubah hanya kode Apps Script-nya.
 
-Contoh isi kolom:
+---
 
-| Waktu | Nama | Hadir | Tamu | Ucapan | Link |
+## A. Perubahan minimal pada kode Anda (3 baris)
+
+| # | Cari | Ganti jadi |
+|---|---|---|
+| 1 | `const COLS = ['Waktu','Nama','Kehadiran','Tamu','Ucapan'];` | `const COLS = ['Waktu','Nama','Kehadiran','Tamu','Ucapan','Link'];` |
+| 2 | `sheet_().appendRow([new Date(), d.nama\|\|'', d.hadir\|\|'', d.tamu\|\|'', d.ucapan\|\|'']);` | `sheet_().appendRow([new Date(), d.nama\|\|'', d.hadir\|\|'', d.tamu\|\|'', d.ucapan\|\|'', d.link\|\|'']);` |
+| 3 | (opsional) di `doGet` | tambahkan `link: String(r[5]\|\|'')` pada objek hasil `map` |
+
+Karena sheet `Ucapan` **sudah ada**, baris `if (!sh) { … appendRow(COLS) }` tidak pernah
+jalan lagi — jadi header `Link` perlu ditambahkan lewat salah satu cara berikut:
+
+**Cara 1 – sisipkan otomatis di `sheet_()`** (tambahkan setelah `const header = …`),
+seperti pada file `apps-script/Code.gs` di repo ini:
+
+```javascript
+  } else if (header.indexOf('Link') === -1) {   // sheet lama (5 kolom) -> tambah kolom Link
+    const next = Math.max(sh.getLastColumn(), 1) + 1;
+    sh.getRange(1, next).setValue('Link').setFontWeight('bold');
+  }
+```
+
+**Cara 2 – jalankan sekali fungsi ini dari editor Apps Script:**
+
+```javascript
+function tambahKolomLink() {
+  const sh = sheet_();
+  const next = Math.max(sh.getLastColumn(), 1) + 1;
+  sh.getRange(1, next).setValue('Link').setFontWeight('bold');
+}
+```
+
+**Cara 3 – manual:** ketik `Link` di sel **F1** spreadsheet.
+
+Setelah itu: **Deploy → Manage deployments → ikon pensil → Version: `New version` → Deploy**
+(URL `/exec` tetap sama, halaman undangan tidak perlu diubah).
+
+## B. Atau langsung tempel file lengkap
+
+Isi `apps-script/Code.gs` di repo ini adalah versi kode Anda + kolom Link:
+
+| Baris | Isi |
+|---|---|
+| `COLS` | `['Waktu','Nama','Kehadiran','Tamu','Ucapan','Link']` |
+| `sheet_()` | membuat sheet `Ucapan` + header bila belum ada; **menambah kolom `Link` otomatis** bila sheet lama hanya 5 kolom |
+| `doPost` | `appendRow([new Date(), nama, hadir, tamu, ucapan, link])` |
+| `doGet` | terbaru di atas, menyertakan `link` dari `r[5]` |
+
+Salin seluruh isi file itu ke `Code.gs` di editor Apps Script → simpan → deploy `New version`.
+
+---
+
+## Hasilnya
+
+| Waktu | Nama | Kehadiran | Tamu | Ucapan | Link |
 |---|---|---|---|---|---|
-| 2026-10-18 09:12:30 | Budi | present | 2 | Selamat ya! | https://…/the.invisimple.id/m01/index.html?to=Keluarga%20Harto |
+| 18/10/2026 09:12 | Budi | present | 2 | Selamat ya! | https://…/the.invisimple.id/m01/index.html?to=Keluarga%20Harto |
 
-Sisi undangan (`the.invisimple.id/m01/index.html`) **sudah** dikirim dengan field `link`,
-jadi yang perlu dilakukan hanya memasang backend-nya satu kali.
+- Kolom `Link` berisi link undangan yang **dibuka tamu** (termasuk `?to=Nama Tamu`), diisi
+  otomatis oleh halaman undangan — tidak perlu diisi manual.
+- Ucapan lama tetap aman: kolom baru ditambahkan di kanan, baris lama tidak diubah.
+- Kalau kolom `Link` ingin diisi manual: ketik `Link` di F1, lalu semua ucapan baru otomatis
+  masuk ke kolom F.
 
----
-
-## 1. Pasang backend (sekali saja)
-
-1. Buka **Spreadsheet daftar ucapan** → menu **Extensions → Apps Script**.
-2. Hapus seluruh isi `Code.gs`, lalu **tempel seluruh isi** file `apps-script/Code.gs`
-   yang ada di repo ini. Simpan (`Ctrl+S`).
-3. Pada dropdown fungsi, pilih **`tambahKolomLink`** → **Run** → izinkan akses
-   (Authorize). Fungsi ini menambahkan header **Link** di spreadsheet dan menampilkan
-   peta kolomnya, mis.:
-
-   ```
-   Waktu = kolom 1
-   Nama = kolom 2
-   Hadir = kolom 3
-   Tamu = kolom 4
-   Ucapan = kolom 5
-   Link = kolom 6
-   ```
-4. **Deploy → Manage deployments → ikon pensil → Version: `New version` → Deploy.**
-   URL `/exec` **tetap sama**, jadi halaman undangan tidak perlu diubah lagi.
-
-> Kalau langkah 3 dilewat pun tidak masalah: kolom `Link` juga dibuat otomatis saat
-> ucapan pertama masuk (kolom baru selalu ditambahkan di kanan data lama).
-
-## 2. Cek hasilnya
-
-- Kirim satu ucapan dari undangan (isi nama + ucapan), lalu lihat spreadsheet:
-  baris baru harus punya isi di kolom **Link**.
-- Di Apps Script: pilih fungsi **`cekData`** → **Run** → lihat **View → Logs**
-  untuk melihat data + link yang tersimpan.
-
----
-
-## Catatan penting
-
-- **Data lama tidak diubah.** Kolom baru ditambahkan di sebelah kanan, baris lama dibiarkan apa adanya.
-- **Kalau spreadsheet belum punya baris header sama sekali**, script menyisipkan baris
-  header standar di atas data lama (data lama tetap utuh, hanya bergeser ke bawah).
-- **Nama header boleh berbeda.** Script mengenali padanan seperti
-  `Timestamp/Name/Attendance/Guests/Message`, sehingga tidak masalah kalau header
-  spreadsheet memakai istilah lain.
-- **Link tidak ikut di JSON publik.** `doGet` (yang dipakai daftar ucapan di halaman
-  undangan) tidak menyertakan `link`. Kalau perlu melihatnya via URL, isi dulu
-  `ADMIN_KEY` di `Code.gs`, lalu akses `…/exec?key=KUNCI_RAHASIA`.
-- **Isi kolom Hadir** mengikuti data lama (`present` / `notpresent`). Kalau ingin
-  yang lebih enak dibaca (`Hadir` / `Tidak Hadir`), ubah
-  `SIMPAN_LABEL_HADIR = true;` di bagian atas `Code.gs` (halaman undangan tetap
-  menampilkan label yang benar).
-- Panjang link dibatasi `LINK_PANJANG` (default 500 karakter) supaya sel tetap rapi.
-- Sel link otomatis dibuat **klikabel** (rich text hyperlink) di spreadsheet.
-
-## Opsi di bagian atas `Code.gs`
+## Konfigurasi di atas `Code.gs`
 
 | Variabel | Default | Fungsi |
 |---|---|---|
-| `SHEET_NAME` | `''` | `''` = pakai tab/sheet pertama, atau isi nama tab tertentu |
+| `SHEET_NAME` | `'Ucapan'` | nama tab spreadsheet yang dipakai |
 | `MAX_UCAPAN` | `300` | jumlah ucapan terakhir yang dikirim ke halaman undangan |
-| `ADMIN_KEY` | `''` | kunci rahasia agar `?key=…` pada URL `exec` ikut menampilkan link |
-| `LINK_PANJANG` | `500` | batas panjang link yang disimpan |
-| `SIMPAN_LABEL_HADIR` | `false` | `true` = simpan `Hadir`/`Tidak Hadir` di spreadsheet |
 
-## Troubleshooting
+## Catatan
 
-- **Kolom Link kosong padahal ucapan masuk** → backend belum diganti. Ulangi langkah 1
-  lalu pastikan deployment memakai **New version** (bukan versi lama).
-- **Ucapan tidak bertambah sama sekali** → cek **Executions** di Apps Script untuk
-  melihat error, lalu pastikan akses Web App = *Anyone* (Deploy → Manage deployments →
-  Who has access).
-- **Tamu mengisi nama berbeda dari link** → kolom `Nama` = nama yang diketik tamu,
-  kolom `Link` tetap menunjukkan link yang ia buka (berisi nama tamu undangan).
+- `link` ikut tampil di JSON `doGet` (kolom `r[5]`). Kalau tidak ingin link terlihat
+  publik, hapus baris `link: String(r[5] || '')` — kolom di spreadsheet tetap terisi.
+- Tombol **`tambahKolomLink`** bisa di-`Run` kapan saja untuk memastikan kolom `Link` ada;
+  hasilnya muncul di **View → Logs**.
+- Kalau ucapan tidak masuk sama sekali: cek **Executions** di Apps Script untuk melihat
+  error dan pastikan akses Web App = *Anyone* (Deploy → Manage deployments → Who has access).
