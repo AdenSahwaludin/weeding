@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buat Link Tamu — Aden &amp; Mega</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;background:#eef2ea;color:#333;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fffdf8;max-width:520px;width:100%;border-radius:18px;padding:28px 24px;box-shadow:0 8px 32px rgba(0,0,0,.12);border:1px solid #e5ddd0}
+h1{font-size:24px;color:#5d8266;margin:0 0 4px;text-align:center}
+.sub{text-align:center;color:#888;font-size:14px;margin:0 0 20px}
+label{display:block;font-size:14px;font-weight:700;margin:14px 0 6px}
+input[type=text]{width:100%;padding:12px;border:1.5px solid #c9d6c2;border-radius:10px;font-size:16px;font-family:inherit}
+input[type=text]:focus{outline:none;border-color:#85A57A}
+.out{background:#f4f7f1;border:1.5px dashed #85A57A;border-radius:10px;padding:12px;font-size:14px;word-break:break-all;color:#2f4a34;min-height:60px}
+.btnrow{display:flex;gap:10px;margin-top:14px}
+button,a.btn{flex:1;text-align:center;padding:12px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;border:none;text-decoration:none}
+.copy{background:#85A57A;color:#fff}
+.wa{background:#25D366;color:#fff}
+.hint{font-size:13px;color:#888;margin-top:14px;text-align:center}
+.cover-mini{border:1px solid #e5ddd0;border-radius:12px;padding:14px;margin-top:16px;text-align:center;background:#fff}
+.cover-mini b{font-size:17px}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Buat Link Tamu</h1>
+  <p class="sub">Aden &amp; Mega — 18 Oktober 2026</p>
+  <label for="in-nama">Nama tamu</label>
+  <input type="text" id="in-nama" placeholder="cth: Keluarga Bpk. Harto" maxlength="60" autocomplete="off">
+  <label>Link undangan</label>
+  <div class="out" id="out-link"></div>
+  <div class="btnrow">
+    <button class="copy" id="btn-copy" type="button">Salin Link</button>
+    <a class="wa" id="btn-wa" href="#" target="_blank" rel="noopener">Bagikan WA</a>
+  </div>
+  <div class="cover-mini">Pratinjau cover: Kepada Yth.<br><b id="preview-nama">Bapak/Ibu/Saudara/i</b></div>
+  <p class="hint">Kosongkan nama untuk link umum (tanpa nama tamu).</p>
+</div>
+<script>
+(function(){
+var inp=document.getElementById('in-nama'),
+    out=document.getElementById('out-link'),
+    prev=document.getElementById('preview-nama'),
+    wa=document.getElementById('btn-wa');
+function base(){return location.href.split('?')[0].split('#')[0].replace(/\/[^\/]*$/,'/the.invisimple.id/m01/index.html');}
+function upd(){
+  var n=inp.value.trim().slice(0,60);
+  var u=n?base()+'?to='+encodeURIComponent(n):base();
+  out.textContent=u;
+  prev.textContent=n||'Bapak/Ibu/Saudara/i';
+  wa.href='https://wa.me/?text='+encodeURIComponent('Kepada Yth. '+(n||'Bapak/Ibu/Saudara/i')+'\n\nAssalamualaikum, dengan hormat kami mengundang ke pernikahan kami:\n'+u+'\n\nMerupakan kehormatan bagi kami atas kehadiran dan doa restunya.\nAden & Mega');
+}
+inp.addEventListener('input',upd);upd();
+document.getElementById('btn-copy').addEventListener('click',function(){
+  var t=out.textContent,ok=function(){this.textContent='Tersalin!';var b=this;setTimeout(function(){b.textContent='Salin Link';},1500);};
+  var b=this;
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){ok.call(b);});}
+  else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok.call(b);}catch(e){}document.body.removeChild(ta);}
+});
+})();
+</script>
+</body>
+</html>
