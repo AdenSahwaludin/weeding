@@ -1,0 +1,6 @@
+# backup lokal (jangan ikut ke Vercel)
+*.bak
+*.bak2
+*.bak3
+*.bak4
+index.html.bak*

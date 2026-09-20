@@ -1,0 +1,42 @@
+CARA GANTI FOTO - TINGGAL TIMPA SAJA
+====================================
+Folder ini: m1/assets/
+Halaman pakai: m1/the.invisimple.id/m01/index.html
+
+Semua foto sudah dipindah ke sini. Untuk mengganti, cukup timpa file
+dengan nama yang SAMA. Ukuran dan format usahakan sama agar layout tidak rusak.
+
+DAFTAR FILE:
+- couple-1.png          : Foto mempelai wanita (cover + profil Putri)
+- couple-2.png          : Foto mempelai pria (cover + profil Andika)
+- ornamen-pemisah.png   : Ornamen pemisah P / A (transparan)
+- bg-hero.jpeg          : Background utama / hero (dipakai 8x)
+- bg-ayat.jpg           : Background ayat Ar-Rum
+- bg-overlay.jpg        : Overlay background
+- bg-card.jpg           : Background kartu
+- bouquet.png           : Hiasan bunga
+- lovestory-1.jpeg      : Love story 25 AGUSTUS 2023
+- lovestory-2.jpeg      : Love story 03 JUNI 2024
+- lovestory-3.jpeg      : Love story 29 DESEMBER 2025
+- galeri-1.jpeg s/d galeri-8.jpeg : Our Moments (8 foto)
+- bank-jago.svg         : Logo Bank Jago (Mega)
+- bank-seabank.svg      : Logo SeaBank (Aden)
+- chip.png              : Hiasan chip kartu ATM
+- logo.png              : Favicon + logo invisimple
+- preview.jpg           : Gambar share / preview (tidak tampil di halaman)
+- mouse-scroll.json     : Animasi lottie mouse (jangan timpa dengan gambar)
+- musik.mp3             : Musik latar undangan
+
+CONTOH:
+Mau ganti foto prewedding Aden & Mega untuk galeri 1?
+Timpa saja galeri-1.jpeg dengan foto baru yang namanya tetap galeri-1.jpeg.
+
+CATATAN:
+- Jangan ubah nama file, hanya isi filenya.
+- File asli masih ada sebagai backup di the.invisimple.id/wp-content/uploads/
+- Kalau buka via double-click dan gambar tidak muncul, buka via server lokal:
+  python3 -m http.server  (dari folder m1)
+
+REKENING (di halaman gift):
+- Bank Jago 1087977651095 a.n. Mega Dwi Wahyuni
+- SeaBank 901127285814 a.n. Aden Sahwaludin (tanpa gelar)
