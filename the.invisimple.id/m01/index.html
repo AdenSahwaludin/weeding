@@ -659,8 +659,10 @@ function init(){
   if(bp)bp.addEventListener('click',function(){setAtt('present',bp);});
   if(bn)bn.addEventListener('click',function(){setAtt('notpresent',bn);});
   load();
-  form.addEventListener('submit',function(ev){
+  var scope=document.getElementById('saic-wrap-comment-6854')||document;
+  scope.addEventListener('submit',function(ev){
     ev.preventDefault();
+    if(ev.stopPropagation)ev.stopPropagation();
     var nama=(document.getElementById('author').value||'').trim();
     var ucap=(document.getElementById('saic-textarea-6854').value||'').trim();
     var tamu=(document.getElementById('guest').value||'1');
