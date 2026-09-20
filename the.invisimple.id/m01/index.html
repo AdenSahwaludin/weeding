@@ -672,13 +672,16 @@ function init(){
     var ucap=(document.getElementById('saic-textarea-6854').value||'').trim();
     var tamu=(document.getElementById('guest').value||'1');
     var hadir=att?att.value:'';
+    // Link undangan yang dibuka tamu (otomatis, termasuk ?to=Nama tamu)
+    var link='';
+    try{link=(window.location.href||'').split('#')[0].slice(0,500);}catch(err){link='';}
     if(nama.length<2){msg.textContent='Isi nama dulu ya (min. 2 huruf).';return;}
     if(!ucap){msg.textContent='Tulis ucapan dulu ya.';return;}
     var btn=document.getElementById('submit-6854');
     if(btn){btn.disabled=true;btn.value='Mengirim...';}
     msg.textContent='';
     fetch(URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify({nama:nama,hadir:hadir,tamu:tamu,ucapan:ucap})})
+      body:JSON.stringify({nama:nama,hadir:hadir,tamu:tamu,ucapan:ucap,link:link})})
     .then(function(){return load();})
     .then(function(){
       document.getElementById('author').value='';
