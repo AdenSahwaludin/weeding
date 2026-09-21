@@ -7,8 +7,13 @@ Semua foto sudah dipindah ke sini. Untuk mengganti, cukup timpa file
 dengan nama yang SAMA. Ukuran dan format usahakan sama agar layout tidak rusak.
 
 DAFTAR FILE:
-- couple-1.png          : Foto mempelai wanita (cover + profil Putri)
-- couple-2.png          : Foto mempelai pria (cover + profil Andika)
+- cover-slide-1.jpeg s/d 3.jpeg     : Foto pembuka / atas (3 slide bergantian)
+- mempelai-wanita-1.jpeg & 2.jpeg   : Foto profil mempelai wanita (2 slide bergantian)
+- mempelai-pria-1.jpeg & 2.jpeg     : Foto profil mempelai pria (2 slide bergantian)
+- savethedate-1.jpeg s/d 3.jpeg     : Foto di atas "Save The Date" (3 slide bergantian)
+- penutup-slide-1.jpeg s/d 3.jpeg   : Foto di atas "Terima Kasih" (3 slide bergantian)
+- couple-1.png          : Hiasan bunga sudut (transparan)
+- couple-2.png          : Hiasan bunga sudut (transparan)
 - ornamen-pemisah.png   : Ornamen pemisah P / A (transparan)
 - bg-hero.jpeg          : Background utama / hero (dipakai 8x)
 - bg-ayat.jpg           : Background ayat Ar-Rum
