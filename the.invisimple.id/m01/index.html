@@ -4277,7 +4277,7 @@ Indramayu 45255">
 													src="../../ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 												<script data-optimized="1"
 													src="../wp-content/litespeed/js/051a23887bb76a428f4cfc30f318f8cd.js"></script>
-												<script>var cover = document.getElementById('cover'); var btn_open = document.getElementById('btn_open'); let delaySection = 0; const isEditorActive = document.body.classList.contains('elementor-editor-active'); document.addEventListener('DOMContentLoaded', () => { document.querySelector('.motionSection .elementor-background-video-container video').removeAttribute('autoplay'); document.querySelector('.kolomPertama').style.display = 'none'; delaySection = document.querySelector('.kolomPertama').dataset.delayTime }); if (typeof elementorFrontendConfig === 'undefined') { disableScrolling(); document.body.style.height = "100vh"; btn_open.onclick = function () { enableScrolling(); closeCover(); myFunction() } }
+												<script>var cover = document.getElementById('cover'); var btn_open = document.getElementById('btn_open'); let delaySection = 0; const isEditorActive = document.body.classList.contains('elementor-editor-active'); document.addEventListener('DOMContentLoaded', () => { document.querySelector('.motionSection .elementor-background-video-container video').removeAttribute('autoplay'); document.querySelector('.kolomPertama').style.display = 'none'; delaySection = document.querySelector('.kolomPertama').dataset.delayTime }); if (typeof elementorFrontendConfig === 'undefined') { disableScrolling(); document.body.style.height = "100vh"; btn_open.onclick = function () { enableScrolling(); closeCover(); myFunction(); if (typeof window.playAudio === 'function') { window.playAudio(); } } }
 													function myFunction() { setTimeout(() => { document.querySelector('.motionSection .elementor-background-video-container video').play() }, 100); setTimeout(() => { document.querySelector('.kolomPertama').style.display = 'block' }, delaySection) }
 													function disableScrolling() { var x = window.scrollX; var y = window.scrollY; window.onscroll = function () { window.scrollTo(x, y) }; jQuery('body').css('overflow', 'hidden') }
 													function enableScrolling() { window.onscroll = function () { }; jQuery('body').css('overflow', 'visible') }
@@ -5777,6 +5777,273 @@ Indramayu 45255">
 				}, true);
 			})();
 			</script>
+
+		<!-- Audio Player Widget (Golden Hour - JVKE Cinematic Violin Cover) -->
+		<div class="elementor-element elementor-element-73703ab elementor-widget elementor-widget-ams-audio" data-id="73703ab" data-element_type="widget" data-widget_type="ams-audio.default">
+			<style>
+				#wds-audio-container {
+					transition: transform .75s ease-in-out;
+					position: fixed;
+					z-index: 9999;
+					bottom: 24px;
+					right: 20px;
+					line-height: 0;
+					user-select: none;
+					-webkit-user-select: none;
+					-webkit-tap-highlight-color: transparent;
+				}
+				#mute-sound {
+					-webkit-animation: rotating 8s linear infinite;
+					-moz-animation: rotating 8s linear infinite;
+					-ms-animation: rotating 8s linear infinite;
+					-o-animation: rotating 8s linear infinite;
+					animation: rotating 8s linear infinite;
+				}
+				@keyframes rotating {
+					from {
+						-webkit-transform: rotate(0deg);
+						-moz-transform: rotate(0deg);
+						transform: rotate(0deg);
+					}
+					to {
+						-webkit-transform: rotate(360deg);
+						-moz-transform: rotate(360deg);
+						transform: rotate(360deg);
+					}
+				}
+				[class~=slide-right] {
+					transform: translateX(150%);
+				}
+				[class~=slide-left] {
+					transform: translateX(0);
+				}
+				#wds-audio-container .elementor-icon-wrapper {
+					cursor: pointer;
+				}
+				#wds-audio-container .elementor-icon {
+					cursor: pointer;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 46px;
+					height: 46px;
+					border-radius: 50%;
+					background: #fff;
+					box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+					transition: transform 0.2s ease, box-shadow 0.2s ease;
+				}
+				#wds-audio-container .elementor-icon:hover {
+					transform: scale(1.08);
+					box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+				}
+				#wds-audio-container .elementor-icon:active {
+					transform: scale(0.92);
+				}
+				#wds-audio-container .elementor-icon svg {
+					width: 46px;
+					height: 46px;
+					display: block;
+				}
+				@media (max-width: 600px) {
+					#wds-audio-container {
+						bottom: 20px;
+						right: 16px;
+					}
+					#wds-audio-container .elementor-icon,
+					#wds-audio-container .elementor-icon svg {
+						width: 42px;
+						height: 42px;
+					}
+				}
+			</style>
+			<div id="wds-audio-container" class="wds-audio-box slide-left">
+				<audio id="song" loop preload="auto">
+					<source src="../../assets/musik.mp3" type="audio/mp3">
+					<source src="../wp-content/uploads/2024/10/Golden-Hour-JVKE-Cinematic-Violin-Cover.mp3" type="audio/mp3">
+				</audio>
+				<div class="elementor-icon-wrapper" id="unmute-sound" style="display: block; line-height: 0;" title="Putar Musik">
+					<div class="elementor-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 45.75 45.75"><defs><style>.b088c895-30ef-4b38-8bef-465c79cceef2{stroke:#000;stroke-miterlimit:10;stroke-width:.25px;fill:url(#add51f77-6c43-4e92-98c1-48c56afe77db)}.a95d47f6-75cd-4161-8b64-9641bbc2a22b{fill:url(#fe3aecdf-9a06-4e57-bc62-aff2babc5340)}.ad4c80e8-1f3e-4ae5-bd8f-56eead1a3d35{fill:#fff;fill-rule:evenodd}</style><linearGradient id="add51f77-6c43-4e92-98c1-48c56afe77db" x1="0.13" y1="22.87" x2="50.96" y2="22.87" gradientUnits="userSpaceOnUse"><stop offset="0.09" stop-color="#0c0c0c"></stop><stop offset="0.17" stop-color="#101010"></stop><stop offset="0.26" stop-color="#1d1e1e"></stop><stop offset="0.35" stop-color="#313434"></stop><stop offset="0.44" stop-color="#4b4f4f"></stop><stop offset="0.54" stop-color="#333636"></stop><stop offset="0.68" stop-color="#151616"></stop><stop offset="0.76" stop-color="#0a0a0a"></stop></linearGradient><linearGradient id="fe3aecdf-9a06-4e57-bc62-aff2babc5340" x1="12.8" y1="27.1" x2="33.91" y2="18.24" gradientUnits="userSpaceOnUse"><stop offset="0.46" stop-color="#00928b"></stop><stop offset="0.77" stop-color="#00736d"></stop><stop offset="1" stop-color="#00625d"></stop></linearGradient></defs><title>Putar Musik</title><g id="a0582147-efb1-4ecf-91cf-63f6669d9ac9" data-name="Layer 2"><g id="ae69d7be-e777-4282-9194-3cadb6813425" data-name="Layer 1"><circle class="b088c895-30ef-4b38-8bef-465c79cceef2" cx="22.87" cy="22.87" r="22.75"></circle><circle class="a95d47f6-75cd-4161-8b64-9641bbc2a22b" cx="22.87" cy="22.87" r="11.21"></circle><path class="ad4c80e8-1f3e-4ae5-bd8f-56eead1a3d35" d="M20.16,16A1.27,1.27,0,1,1,18.9,17.3,1.27,1.27,0,0,1,20.16,16Zm1.27,13.25A5.41,5.41,0,0,1,18.9,24.7V19.29h0a2.51,2.51,0,0,1,2.5,2.5v7.5Z"></path><path class="ad4c80e8-1f3e-4ae5-bd8f-56eead1a3d35" d="M25.58,16.46a1.27,1.27,0,1,1-1.26,1.26,1.26,1.26,0,0,1,1.26-1.26Zm1.27,13.25a5.42,5.42,0,0,1-2.53-4.59V19.7h0a2.51,2.51,0,0,1,2.5,2.5v7.51Z"></path></g></g></svg>
+					</div>
+				</div>
+				<div class="elementor-icon-wrapper" id="mute-sound" style="display: none; line-height: 0;" title="Jeda Musik">
+					<div class="elementor-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="a23e99a7-4f9a-4212-82bf-846542e15be3" data-name="Layer 1" viewBox="0 0 45.74686 45.74686"><defs><style>.e6b615f0-3a34-4966-9b0f-fa8f36adb2f9{stroke:#000;stroke-miterlimit:10;stroke-width:.25px;fill:url(#eb30a15e-de7f-402d-8331-fcf7dede9ed7)}.a9172555-7ee9-4b9b-b7d7-58b349085bf6{fill:url(#f86929c6-8c25-4754-a222-5e6d3ff0148a)}.ec20c653-b043-416a-a11f-32db94110313{fill:#fff}</style><linearGradient id="eb30a15e-de7f-402d-8331-fcf7dede9ed7" x1="0.125" y1="25.12657" x2="50.95953" y2="25.12657" gradientTransform="matrix(1, 0, 0, -1, 0, 48)" gradientUnits="userSpaceOnUse"><stop offset="0.09096" stop-color="#0c0c0c"></stop><stop offset="0.17232" stop-color="#101010"></stop><stop offset="0.26163" stop-color="#1d1e1e"></stop><stop offset="0.35434" stop-color="#313434"></stop><stop offset="0.44121" stop-color="#4b4f4f"></stop><stop offset="0.53874" stop-color="#333636"></stop><stop offset="0.68102" stop-color="#151616"></stop><stop offset="0.76007" stop-color="#0a0a0a"></stop></linearGradient><linearGradient id="f86929c6-8c25-4754-a222-5e6d3ff0148a" x1="12.8031" y1="20.89854" x2="33.90705" y2="29.75903" gradientTransform="matrix(1, 0, 0, -1, 0, 48)" gradientUnits="userSpaceOnUse"><stop offset="0.45725" stop-color="#00928b"></stop><stop offset="0.77455" stop-color="#00736d"></stop><stop offset="1" stop-color="#00625d"></stop></linearGradient></defs><title>Jeda Musik</title><g id="b4e59988-9b80-4119-9938-2513d707876a" data-name="b6468ed4-3545-4f34-9fb7-c938e0b9d8e9"><g id="b3b0dd33-6cd0-46df-9657-c6aceee1b551" data-name="ea460610-dc09-4185-bce2-3dccd975cfed"><circle class="e6b615f0-3a34-4966-9b0f-fa8f36adb2f9" cx="22.87343" cy="22.87343" r="22.74843"></circle><circle class="a9172555-7ee9-4b9b-b7d7-58b349085bf6" cx="22.87343" cy="22.87343" r="11.21049"></circle><path class="ec20c653-b043-416a-a11f-32db94110313" d="M20.11842,18.37793a.52877.52877,0,0,0-.33191.49076v7.16513a1.98982,1.98982,0,1,0,.9198,1.87062h.00037V27.897c.00539-.05969.00914-.11987.00914-.181s-.00375-.12127-.00914-.181V20.69581l5.87859-2.35809v5.016a1.99048,1.99048,0,1,0-.93534,3.663,2.02737,2.02737,0,0,0,1.85551-2.04222V15.97461h0a.37864.37864,0,0,0-.51961-.35142Z"></path></g></g></svg>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		(function () {
+			'use strict';
+			var song = document.getElementById('song');
+			var audioBox = document.getElementById('wds-audio-container');
+			var muteSound = document.getElementById('mute-sound');
+			var unmuteSound = document.getElementById('unmute-sound');
+			var fadeDuration = 1500;
+			var fadeAnimId = null;
+			var wasPlayingBeforeHide = false;
+			var hasStarted = false;
+
+			function audioActive() {
+				if (muteSound) muteSound.style.display = 'block';
+				if (unmuteSound) unmuteSound.style.display = 'none';
+			}
+
+			function audioInactive() {
+				if (muteSound) muteSound.style.display = 'none';
+				if (unmuteSound) unmuteSound.style.display = 'block';
+			}
+
+			function fadeAudio(targetVolume, duration, callback) {
+				if (!song) return;
+				if (fadeAnimId) cancelAnimationFrame(fadeAnimId);
+				var startVolume = Number(song.volume);
+				if (!Number.isFinite(startVolume)) startVolume = 1;
+				var startTime = performance.now();
+
+				function step(now) {
+					if (!song) return;
+					var elapsed = now - startTime;
+					if (elapsed < duration) {
+						var progress = elapsed / duration;
+						song.volume = Math.max(0, Math.min(1, startVolume + ((targetVolume - startVolume) * progress)));
+						fadeAnimId = requestAnimationFrame(step);
+					} else {
+						song.volume = Math.max(0, Math.min(1, targetVolume));
+						fadeAnimId = null;
+						if (callback) callback();
+					}
+				}
+				fadeAnimId = requestAnimationFrame(step);
+			}
+
+			function playAudio() {
+				if (!song) return;
+				hasStarted = true;
+				if (!song.paused) {
+					audioActive();
+					return;
+				}
+				song.volume = 0;
+				var promise;
+				try {
+					promise = song.play();
+				} catch (e) {
+					audioInactive();
+					return;
+				}
+				if (promise && typeof promise.then === 'function') {
+					promise.then(function () {
+						fadeAudio(1, fadeDuration);
+						audioActive();
+					}).catch(function (err) {
+						console.warn("Autoplay ditolak atau belum ada interaksi pengguna:", err);
+						audioInactive();
+					});
+				} else {
+					fadeAudio(1, fadeDuration);
+					audioActive();
+				}
+			}
+
+			function pauseAudio(immediate) {
+				if (!song) return;
+				if (immediate) {
+					if (fadeAnimId) cancelAnimationFrame(fadeAnimId);
+					try { song.pause(); } catch (e) {}
+					audioInactive();
+					return;
+				}
+				fadeAudio(0, 800, function () {
+					try { song.pause(); } catch (e) {}
+					audioInactive();
+				});
+			}
+
+			function toggleAudio() {
+				if (!song) return;
+				if (song.paused) {
+					playAudio();
+				} else {
+					pauseAudio(false);
+				}
+			}
+
+			// Expose global methods
+			window.playAudio = playAudio;
+			window.pauseAudio = pauseAudio;
+			window.toggleAudio = toggleAudio;
+			window.audioActive = audioActive;
+			window.audioInactive = audioInactive;
+
+			// Klik pada tombol piringan hitam di pojok kanan bawah
+			if (audioBox) {
+				audioBox.addEventListener('click', function (e) {
+					e.stopPropagation();
+					toggleAudio();
+				});
+			}
+
+			// Klik pada tombol Buka Undangan
+			function bindOpenBtn() {
+				var btnOpen = document.getElementById('btn_open');
+				if (btnOpen) {
+					btnOpen.addEventListener('click', function () {
+						playAudio();
+					}, true);
+				}
+			}
+			bindOpenBtn();
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', bindOpenBtn);
+			}
+
+			// Pastikan video latar belakang tidak mengeluarkan suara
+			function muteBackgroundVideos() {
+				var vids = document.querySelectorAll('video');
+				for (var i = 0; i < vids.length; i++) {
+					vids[i].muted = true;
+				}
+			}
+			muteBackgroundVideos();
+			window.addEventListener('load', muteBackgroundVideos);
+
+			// Animasi bergeser saat scrolling
+			function bindScrollAnimation() {
+				if (!audioBox) return;
+				var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+				window.addEventListener('scroll', function () {
+					var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+					if (scrollTop > lastScrollTop && scrollTop > 120) {
+						audioBox.classList.remove('slide-left');
+						audioBox.classList.add('slide-right');
+					} else {
+						audioBox.classList.remove('slide-right');
+						audioBox.classList.add('slide-left');
+					}
+					lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+				}, { passive: true });
+			}
+			bindScrollAnimation();
+
+			// Otomatis pause jika pindah tab browser, resume jika kembali
+			document.addEventListener('visibilitychange', function () {
+				if (document.visibilityState === 'hidden') {
+					if (song && !song.paused) {
+						wasPlayingBeforeHide = true;
+						pauseAudio(true);
+					}
+				} else if (document.visibilityState === 'visible') {
+					if (wasPlayingBeforeHide) {
+						wasPlayingBeforeHide = false;
+						playAudio();
+					}
+				}
+			});
+		})();
+		</script>
 </body>
 
 </html>
