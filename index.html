@@ -1689,10 +1689,83 @@
 			background: #eef2ea url("../wp-content/uploads/2024/10/Garden-01-Fallback-1.jpg") center/cover no-repeat
 		}
 	</style>
+	<style id="inv-loader-styles">
+		#inv-top-bar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 3px;
+			width: 0%;
+			background: linear-gradient(90deg, #85A57A, #d4be88, #85A57A);
+			background-size: 200% 100%;
+			animation: invShimmerBar 1.5s infinite linear;
+			z-index: 9999999;
+			transition: width 0.35s ease, opacity 0.5s ease;
+			box-shadow: 0 0 10px rgba(133, 165, 122, 0.8);
+			pointer-events: none;
+		}
+		@keyframes invShimmerBar {
+			0% { background-position: 100% 0; }
+			100% { background-position: -100% 0; }
+		}
+		@keyframes invSpin {
+			100% { transform: rotate(360deg); }
+		}
+		@keyframes invPulseReady {
+			0%, 100% {
+				box-shadow: 0 4px 15px rgba(133, 165, 122, 0.4);
+				transform: scale(1);
+			}
+			50% {
+				box-shadow: 0 6px 24px rgba(133, 165, 122, 0.7);
+				transform: scale(1.03);
+			}
+		}
+		#btn_open.btn-inv-loading {
+			pointer-events: none !important;
+			cursor: wait !important;
+		}
+		#btn_open.btn-inv-loading .elementor-button {
+			pointer-events: none !important;
+			cursor: wait !important;
+			opacity: 0.82 !important;
+			background: #738b6d !important;
+			box-shadow: none !important;
+			transition: all 0.4s ease;
+		}
+		#btn_open.btn-inv-loading .inv-spinner {
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 6px;
+			animation: invSpin 1s linear infinite;
+		}
+		#btn_open.btn-inv-ready .elementor-button {
+			pointer-events: auto !important;
+			cursor: pointer !important;
+			opacity: 1 !important;
+			animation: invPulseReady 2.2s infinite ease-in-out;
+		}
+		.inv-load-status {
+			font-size: 12px;
+			color: #6a7c64;
+			text-align: center;
+			margin-top: 8px;
+			font-family: inherit;
+			letter-spacing: 0.3px;
+			transition: opacity 0.5s ease, transform 0.5s ease;
+			font-weight: 500;
+		}
+		.inv-load-status.is-ready {
+			opacity: 0;
+			transform: translateY(-4px);
+			pointer-events: none;
+		}
+	</style>
 </head>
 
 <body
 	class="wp-singular post-template-default single single-post postid-6854 single-format-standard wp-custom-logo wp-embed-responsive wp-theme-weddingsaas-wp wp-child-theme-weddingsaas-wp-child elementor-default elementor-template-full-width elementor-kit-7 elementor-page-7749 elementor-page-916707 elementor-page-843619 elementor-page-843600 elementor-page-805683">
+	<div id="inv-top-bar"></div>
 	<div data-elementor-type="single-post" data-post-id="6854" data-obj-id="6854" data-elementor-id="7749"
 		class="elementor elementor-7749 e-post-6854 elementor-location-single post-6854 post type-post status-publish format-standard has-post-thumbnail hentry category-pernikahan template-pernikahan-3d-motion-01"
 		data-elementor-settings="{&quot;ha_cmc_init_switcher&quot;:&quot;no&quot;}"
@@ -1845,7 +1918,7 @@
 											</div>
 										</div>
 										<div data-dce-background-color="#85A57A"
-											class="elementor-element elementor-element-686eff4 elementor-align-center elementor-mobile-align-center animated-slow elementor-invisible elementor-widget elementor-widget-button"
+											class="elementor-element elementor-element-686eff4 elementor-align-center elementor-mobile-align-center animated-slow elementor-invisible elementor-widget elementor-widget-button btn-inv-loading"
 											data-id="686eff4" data-element_type="widget" data-e-type="widget"
 											id="btn_open"
 											data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;,&quot;_animation_delay&quot;:2200}"
@@ -1853,15 +1926,16 @@
 											<div class="elementor-widget-container">
 												<div class="elementor-button-wrapper">
 													<a class="elementor-button elementor-size-sm elementor-animation-shrink"
-														role="button">
+														role="button" style="pointer-events: none; cursor: wait;">
 														<span class="elementor-button-content-wrapper">
 															<span class="elementor-button-icon">
-																<i aria-hidden="true" class="far fa-envelope-open"></i>
+																<svg class="inv-spinner" viewBox="0 0 50 50" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;"><circle cx="25" cy="25" r="20" fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="80" stroke-dashoffset="60" stroke-linecap="round"></circle></svg>
 															</span>
-															<span class="elementor-button-text">Buka Undangan</span>
+															<span class="elementor-button-text">Menyiapkan Undangan...</span>
 														</span>
 													</a>
 												</div>
+												<div class="inv-load-status" id="inv_load_status">Memuat video &amp; musik...</div>
 											</div>
 										</div>
 									</div>
@@ -4370,7 +4444,104 @@ Indramayu 45255">
 		}
 	}
 
+	window.isInvitationReady = false;
+
+	var topBar = document.getElementById('inv-top-bar');
+	function setLoadProgress(percent) {
+		if (topBar) {
+			topBar.style.width = percent + '%';
+		}
+	}
+	setLoadProgress(35);
+
+	function markInvitationReady() {
+		if (window.isInvitationReady) return;
+		window.isInvitationReady = true;
+
+		setLoadProgress(100);
+		setTimeout(function() {
+			if (topBar) {
+				topBar.style.opacity = '0';
+				setTimeout(function() {
+					if (topBar && topBar.parentNode) {
+						topBar.parentNode.removeChild(topBar);
+					}
+				}, 500);
+			}
+		}, 350);
+
+		var btn = document.getElementById('btn_open');
+		if (btn) {
+			btn.classList.remove('btn-inv-loading');
+			btn.classList.add('btn-inv-ready');
+
+			var aTag = btn.querySelector('.elementor-button');
+			if (aTag) {
+				aTag.style.pointerEvents = 'auto';
+				aTag.style.cursor = 'pointer';
+			}
+
+			var iconWrapper = btn.querySelector('.elementor-button-icon');
+			if (iconWrapper) {
+				iconWrapper.innerHTML = '<i aria-hidden="true" class="far fa-envelope-open" style="margin-right: 4px;"></i>';
+			}
+
+			var textWrapper = btn.querySelector('.elementor-button-text');
+			if (textWrapper) {
+				textWrapper.textContent = 'Buka Undangan';
+			}
+		}
+
+		var statusTxt = document.getElementById('inv_load_status');
+		if (statusTxt) {
+			statusTxt.textContent = 'Undangan siap dibuka ✨';
+			setTimeout(function() {
+				statusTxt.classList.add('is-ready');
+			}, 1200);
+		}
+	}
+
+	if (document.readyState === 'interactive' || document.readyState === 'complete') {
+		setLoadProgress(65);
+	} else {
+		document.addEventListener('DOMContentLoaded', function() {
+			setLoadProgress(65);
+		});
+	}
+
+	var mv = getMotionVideo();
+	if (mv) {
+		if (mv.readyState >= 3) {
+			setLoadProgress(85);
+		} else {
+			var onVideoReady = function() {
+				setLoadProgress(85);
+				mv.removeEventListener('canplay', onVideoReady);
+				mv.removeEventListener('loadeddata', onVideoReady);
+			};
+			mv.addEventListener('canplay', onVideoReady);
+			mv.addEventListener('loadeddata', onVideoReady);
+		}
+	}
+
+	if (document.readyState === 'complete') {
+		markInvitationReady();
+	} else {
+		window.addEventListener('load', function() {
+			markInvitationReady();
+		});
+	}
+
+	// Batas waktu pengaman jika koneksi sangat lambat (maks 5 detik)
+	setTimeout(function() {
+		markInvitationReady();
+	}, 5000);
+
 	function openInvitation() {
+		if (!window.isInvitationReady) {
+			return;
+		}
+
 		enableScrolling();
 
 		if (window.jQuery && $("#cover").length) {
@@ -4437,6 +4608,7 @@ Indramayu 45255">
 
 	window.openInvitation = openInvitation;
 	window.triggerKolomPertama = triggerKolomPertama;
+	window.markInvitationReady = markInvitationReady;
 })();
 </script>
 											</div>
@@ -6178,7 +6350,15 @@ Indramayu 45255">
 			function bindOpenBtn() {
 				var btnOpen = document.getElementById('btn_open');
 				if (btnOpen) {
-					btnOpen.addEventListener('click', function () {
+					btnOpen.addEventListener('click', function (e) {
+						if (!window.isInvitationReady) {
+							if (e) {
+								e.preventDefault();
+								e.stopPropagation();
+								e.stopImmediatePropagation();
+							}
+							return false;
+						}
 						playAudio();
 					}, true);
 				}
