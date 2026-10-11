@@ -5,6 +5,7 @@
 	<base href="/the.invisimple.id/m01/">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="preload" as="video" href="../wp-content/uploads/2025/10/01.-PAVILION-GARDEN-15S.mp4" type="video/mp4" />
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex" />
 	<title>Undangan Pernikahan Aden &amp; Mega</title>
@@ -1881,8 +1882,12 @@
 											data-id="5f8f911" data-element_type="section" data-e-type="section"
 											data-settings="{&quot;background_background&quot;:&quot;video&quot;,&quot;background_video_link&quot;:&quot;..\/wp-content\/uploads\/2025\/10\/01.-PAVILION-GARDEN-15S.mp4&quot;,&quot;background_play_once&quot;:&quot;yes&quot;,&quot;background_play_on_mobile&quot;:&quot;yes&quot;,&quot;jet_parallax_layout_list&quot;:[]}">
 											<div class="elementor-background-video-container"><video
+													id="motionVideo"
 													class="elementor-background-video-hosted" role="presentation"
-													autoplay muted playsinline preload="metadata"></video></div>
+													muted playsinline preload="auto"
+													src="../wp-content/uploads/2025/10/01.-PAVILION-GARDEN-15S.mp4">
+													<source src="../wp-content/uploads/2025/10/01.-PAVILION-GARDEN-15S.mp4" type="video/mp4">
+												</video></div>
 											<div class="elementor-container elementor-column-gap-no">
 												<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-f851d08"
 													data-id="f851d08" data-element_type="column" data-e-type="column">
@@ -4278,12 +4283,162 @@ Indramayu 45255">
 													src="../../ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 												<script data-optimized="1"
 													src="../wp-content/litespeed/js/051a23887bb76a428f4cfc30f318f8cd.js"></script>
-												<script>var cover = document.getElementById('cover'); var btn_open = document.getElementById('btn_open'); let delaySection = 0; const isEditorActive = document.body.classList.contains('elementor-editor-active'); document.addEventListener('DOMContentLoaded', () => { document.querySelector('.motionSection .elementor-background-video-container video').removeAttribute('autoplay'); document.querySelector('.kolomPertama').style.display = 'none'; delaySection = document.querySelector('.kolomPertama').dataset.delayTime }); if (typeof elementorFrontendConfig === 'undefined') { disableScrolling(); document.body.style.height = "100vh"; btn_open.onclick = function () { enableScrolling(); closeCover(); myFunction(); if (typeof window.playAudio === 'function') { window.playAudio(); } } }
-													function myFunction() { setTimeout(() => { document.querySelector('.motionSection .elementor-background-video-container video').play() }, 100); setTimeout(() => { document.querySelector('.kolomPertama').style.display = 'block' }, delaySection) }
-													function disableScrolling() { var x = window.scrollX; var y = window.scrollY; window.onscroll = function () { window.scrollTo(x, y) }; jQuery('body').css('overflow', 'hidden') }
-													function enableScrolling() { window.onscroll = function () { }; jQuery('body').css('overflow', 'visible') }
-													function closeCover() { $("#cover").slideUp(1500, 'easeInOutCubic') }
-													function munculKolom() { setTimeout(function () { document.querySelector('.kolomPertama').style.display = 'block' }, 14000) }</script>
+												<script>
+(function() {
+	var cover = document.getElementById('cover');
+	var btn_open = document.getElementById('btn_open');
+	var kolomPertama = document.querySelector('.kolomPertama');
+
+	function getMotionVideo() {
+		return document.getElementById('motionVideo') || document.querySelector('.motionSection video');
+	}
+
+	if (kolomPertama) {
+		kolomPertama.style.display = 'none';
+	}
+
+	function pauseMotionVideo() {
+		var v = getMotionVideo();
+		if (v) {
+			try {
+				v.pause();
+				v.currentTime = 0;
+			} catch(e) {}
+		}
+	}
+
+	pauseMotionVideo();
+	document.addEventListener('DOMContentLoaded', pauseMotionVideo);
+	window.addEventListener('load', pauseMotionVideo);
+
+	function disableScrolling() {
+		var x = window.scrollX || 0;
+		var y = window.scrollY || 0;
+		window.onscroll = function () { window.scrollTo(x, y); };
+		document.body.style.overflow = 'hidden';
+		document.body.style.height = '100vh';
+	}
+	disableScrolling();
+
+	function enableScrolling() {
+		window.onscroll = null;
+		document.body.style.overflow = '';
+		document.body.style.height = '';
+	}
+
+	var hasAnimatedKolom = false;
+	function triggerKolomPertama() {
+		if (hasAnimatedKolom) return;
+		hasAnimatedKolom = true;
+
+		var kp = document.querySelector('.kolomPertama');
+		if (!kp) return;
+		kp.style.display = 'block';
+
+		var el1 = kp.querySelector('.elementor-element-13c46f6');
+		if (el1) {
+			el1.classList.remove('elementor-invisible');
+			el1.classList.add('animated', 'zoomIn');
+		}
+
+		setTimeout(function() {
+			var el2 = kp.querySelector('.elementor-element-1e2198b');
+			if (el2) {
+				el2.classList.remove('elementor-invisible');
+				el2.classList.add('animated', 'zoomIn');
+			}
+		}, 350);
+
+		setTimeout(function() {
+			var el3 = kp.querySelector('.elementor-element-0537883');
+			if (el3) {
+				el3.classList.remove('elementor-invisible');
+				el3.classList.add('animated', 'zoomIn');
+			}
+		}, 700);
+
+		setTimeout(function() {
+			var el4 = kp.querySelector('.elementor-element-4705908');
+			if (el4) {
+				el4.classList.remove('elementor-invisible');
+				el4.classList.add('animated', 'fadeInDown');
+			}
+		}, 1050);
+
+		if (window.jQuery) {
+			jQuery(window).trigger('resize').trigger('scroll');
+		}
+	}
+
+	function openInvitation() {
+		enableScrolling();
+
+		if (window.jQuery && $("#cover").length) {
+			$("#cover").slideUp(1000, 'easeInOutCubic', function() {
+				if (typeof revealElements === 'function') {
+					revealElements(".inv-fade-in, .inv-atas, .inv-bawah, .inv-kiri, .inv-kanan, .inv-rotate-in, .inv-flip-x, .inv-flip-y, .inv-zoom-in, .inv-zoom-out, .elementor-invisible");
+				}
+				if (window.jQuery) jQuery(window).trigger('resize').trigger('scroll');
+			});
+		} else {
+			var c = document.getElementById('cover');
+			if (c) c.style.display = 'none';
+		}
+
+		if (typeof window.playAudio === 'function') {
+			window.playAudio();
+		}
+
+		var v = getMotionVideo();
+		if (v) {
+			v.muted = true;
+			try {
+				v.currentTime = 0;
+			} catch(e) {}
+			var p = v.play();
+			if (p && typeof p.then === 'function') {
+				p.catch(function(err) {
+					console.warn("Autoplay video info:", err);
+					triggerKolomPertama();
+				});
+			}
+
+			var onTimeUpdate = function() {
+				if (v.currentTime >= 9.5) {
+					v.removeEventListener('timeupdate', onTimeUpdate);
+					triggerKolomPertama();
+				}
+			};
+			v.addEventListener('timeupdate', onTimeUpdate);
+			v.addEventListener('ended', triggerKolomPertama);
+			v.addEventListener('error', triggerKolomPertama);
+		}
+
+		setTimeout(triggerKolomPertama, 10000);
+
+		var onScrollOnce = function() {
+			if ((window.pageYOffset || document.documentElement.scrollTop || 0) > 40) {
+				triggerKolomPertama();
+				window.removeEventListener('scroll', onScrollOnce);
+			}
+		};
+		window.addEventListener('scroll', onScrollOnce, { passive: true });
+	}
+
+	if (btn_open) {
+		btn_open.onclick = function(e) {
+			if (e) e.preventDefault();
+			openInvitation();
+		};
+		btn_open.addEventListener('click', function(e) {
+			openInvitation();
+		});
+	}
+
+	window.openInvitation = openInvitation;
+	window.triggerKolomPertama = triggerKolomPertama;
+})();
+</script>
 											</div>
 										</div>
 										<div class="elementor-element elementor-element-e9fcb34 elementor-widget elementor-widget-html"
@@ -4291,9 +4446,38 @@ Indramayu 45255">
 											data-widget_type="html.default">
 											<div class="elementor-widget-container">
 												<meta name="theme-color" content="#85A57A">
-												<script>if ('scrollRestoration' in history) { history.scrollRestoration = 'manual' }
-													window.onbeforeunload = function () { window.scrollTo(0, 0) }; function revealElements(selector) { var elements = document.querySelectorAll(selector); var windowHeight = window.innerHeight; var elementVisible = 150; elements.forEach(function (element) { var elementTop = element.getBoundingClientRect().top; if (elementTop < windowHeight - elementVisible) { element.classList.add("active") } else { element.classList.remove("active") } }) }
-													window.addEventListener("scroll", function () { revealElements(".inv-fade-in, .inv-atas, .inv-bawah, .inv-kiri, .inv-kanan, .inv-rotate-in, .inv-flip-x, .inv-flip-y, .inv-zoom-in, .inv-zoom-out") })</script>
+												<script>
+													if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+													window.onbeforeunload = function () { window.scrollTo(0, 0); };
+													function revealElements(selector) {
+														var elements = document.querySelectorAll(selector);
+														var windowHeight = window.innerHeight;
+														var elementVisible = 80;
+														for (var i = 0; i < elements.length; i++) {
+															var element = elements[i];
+															var elementTop = element.getBoundingClientRect().top;
+															if (elementTop < windowHeight - elementVisible) {
+																element.classList.add("active");
+																element.classList.remove("elementor-invisible");
+																var settingsStr = element.getAttribute("data-settings");
+																if (settingsStr && !element.classList.contains("animated")) {
+																	try {
+																		var s = JSON.parse(settingsStr);
+																		if (s._animation) {
+																			element.classList.add("animated", s._animation);
+																		}
+																	} catch(e) {}
+																}
+															}
+														}
+													}
+													window.addEventListener("scroll", function () {
+														revealElements(".inv-fade-in, .inv-atas, .inv-bawah, .inv-kiri, .inv-kanan, .inv-rotate-in, .inv-flip-x, .inv-flip-y, .inv-zoom-in, .inv-zoom-out, .elementor-invisible");
+													}, { passive: true });
+													window.addEventListener("resize", function () {
+														revealElements(".inv-fade-in, .inv-atas, .inv-bawah, .inv-kiri, .inv-kanan, .inv-rotate-in, .inv-flip-x, .inv-flip-y, .inv-zoom-in, .inv-zoom-out, .elementor-invisible");
+													}, { passive: true });
+												</script>
 												<style>
 													.inv-fade-in {
 														opacity: 0;
@@ -4467,7 +4651,10 @@ Indramayu 45255">
 							data-settings="{&quot;jet_parallax_layout_list&quot;:[],&quot;background_background&quot;:&quot;video&quot;,&quot;background_video_link&quot;:&quot;..\/wp-content\/uploads\/2024\/10\/Garden-01-Video-BG.mp4&quot;,&quot;background_play_on_mobile&quot;:&quot;yes&quot;}">
 							<div class="elementor-background-video-container"><video
 									class="elementor-background-video-hosted" role="presentation" autoplay muted
-									playsinline loop preload="metadata"></video></div>
+									playsinline loop preload="auto"
+									src="../wp-content/uploads/2024/10/Garden-01-Video-BG.mp4">
+									<source src="../wp-content/uploads/2024/10/Garden-01-Video-BG.mp4" type="video/mp4">
+								</video></div>
 							<div class="elementor-container elementor-column-gap-no">
 								<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-0a9eba2"
 									data-id="0a9eba2" data-element_type="column" data-e-type="column">
