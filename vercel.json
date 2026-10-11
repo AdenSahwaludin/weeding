@@ -1,4 +1,11 @@
 {
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/m01", "destination": "/" },
+    { "source": "/wp-content/(.*)", "destination": "/the.invisimple.id/wp-content/$1" },
+    { "source": "/wp-includes/(.*)", "destination": "/the.invisimple.id/wp-includes/$1" },
+    { "source": "/wp-json/(.*)", "destination": "/the.invisimple.id/wp-json/$1" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

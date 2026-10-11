@@ -44,7 +44,10 @@ var inp=document.getElementById('in-nama'),
     out=document.getElementById('out-link'),
     prev=document.getElementById('preview-nama'),
     wa=document.getElementById('btn-wa');
-function base(){return location.href.split('?')[0].split('#')[0].replace(/\/[^\/]*$/,'/the.invisimple.id/m01/index.html');}
+function base(){
+  var o = location.origin || (location.protocol + '//' + location.host);
+  return o + '/';
+}
 function upd(){
   var n=inp.value.trim().slice(0,60);
   var u=n?base()+'?to='+encodeURIComponent(n):base();

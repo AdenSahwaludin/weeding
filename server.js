@@ -38,11 +38,14 @@ const server = http.createServer((req, res) => {
 
     // Friendly URL rewrites / shortcuts
     if (pathname === '/m01' || pathname === '/m01/') {
-      res.writeHead(302, { Location: '/the.invisimple.id/m01/index.html' + parsedUrl.search });
+      res.writeHead(302, { Location: '/' + (parsedUrl.search || '') });
       return res.end();
     }
     if (pathname === '/tamu' || pathname === '/tamu/') {
       pathname = '/tamu.html';
+    }
+    if (pathname.startsWith('/wp-content/') || pathname.startsWith('/wp-includes/') || pathname.startsWith('/wp-json/')) {
+      pathname = '/the.invisimple.id' + pathname;
     }
 
     let filePath = path.normalize(path.join(ROOT_DIR, pathname));
@@ -115,7 +118,5 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`\n Wedding Invitation Server is running!`);
   console.log(`➜  Local:           http://localhost:${PORT}/`);
-  console.log(`➜  Undangan (m01):  http://localhost:${PORT}/the.invisimple.id/m01/index.html`);
-  console.log(`➜  Shortcut m01:    http://localhost:${PORT}/m01`);
   console.log(`➜  Buat Link Tamu:  http://localhost:${PORT}/tamu.html\n`);
 });

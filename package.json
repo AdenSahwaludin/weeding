@@ -1,7 +1,7 @@
 {
   "name": "wedding-invitation-m01",
   "version": "1.0.0",
-  "description": "Undangan Pernikahan Aden & Mega - Tema 3D Motion 01",
+  "description": "Undangan Pernikahan Aden & Mega",
   "main": "server.js",
   "scripts": {
     "dev": "node server.js",
