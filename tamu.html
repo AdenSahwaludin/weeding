@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Buat Link Tamu — Aden &amp; Mega</title>
+<meta property="og:title" content="Buat Link Tamu — Undangan Aden &amp; Mega" />
+<meta property="og:description" content="Generator link undangan pernikahan Aden &amp; Mega." />
+<meta property="og:image" content="https://weeding.adensahwaludin.app/assets/preview.jpg?v=2" />
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Georgia,'Times New Roman',serif;background:#eef2ea;color:#333;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -19,8 +22,10 @@ button,a.btn{flex:1;text-align:center;padding:12px;border-radius:10px;font-size:
 .copy{background:#85A57A;color:#fff}
 .wa{background:#25D366;color:#fff}
 .hint{font-size:13px;color:#888;margin-top:14px;text-align:center}
-.cover-mini{border:1px solid #e5ddd0;border-radius:12px;padding:14px;margin-top:16px;text-align:center;background:#fff}
-.cover-mini b{font-size:17px}
+.cover-mini{border:1px solid #d8e2d4;border-radius:14px;padding:16px 14px;margin-top:16px;text-align:center;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.cover-photo{width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid #85A57A;display:block;margin:0 auto 8px;box-shadow:0 4px 10px rgba(133,165,122,.25)}
+.cover-tag{font-size:12px;color:#888;margin-bottom:2px}
+.cover-mini b{font-size:18px;color:#2f4a34;display:block;margin-top:3px}
 </style>
 </head>
 <body>
@@ -35,7 +40,11 @@ button,a.btn{flex:1;text-align:center;padding:12px;border-radius:10px;font-size:
     <button class="copy" id="btn-copy" type="button">Salin Link</button>
     <a class="wa" id="btn-wa" href="#" target="_blank" rel="noopener">Bagikan WA</a>
   </div>
-  <div class="cover-mini">Pratinjau cover: Kepada Yth.<br><b id="preview-nama">Bapak/Ibu/Saudara/i</b></div>
+  <div class="cover-mini">
+    <img src="assets/preview.jpg" alt="Aden &amp; Mega" class="cover-photo">
+    <div class="cover-tag">Pratinjau cover: Kepada Yth.</div>
+    <b id="preview-nama">Bapak/Ibu/Saudara/i</b>
+  </div>
   <p class="hint">Kosongkan nama untuk link umum (tanpa nama tamu).</p>
 </div>
 <script>
